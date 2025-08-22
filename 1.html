@@ -1,0 +1,509 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CAmgz主页</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Microsoft YaHei', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --primary: #2196F3;
+            --primary-light: #64B5F6;
+            --secondary: #fb7299;
+            --secondary-light: #ffafc7;
+            --accent: #2196F3;
+            --accent-light: #64B5F6;
+            --text: #2d3748;
+            --text-light: #718096;
+            --background: rgba(255, 255, 255, 0.95);
+            --card-bg: rgba(255, 255, 255, 0.8);
+            --shadow: 0 10px 25px rgba(33, 150, 243, 0.15);
+            --transition: all 0.3s ease;
+        }
+        
+        body {
+            background: linear-gradient(135deg, rgba(33, 150, 243, 0.1) 0%, rgba(100, 181, 246, 0.1) 100%), url('https://images.unsplash.com/photo-1519681393784-d120267933ba?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80') no-repeat center center fixed;
+            background-size: cover;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            color: var(--text);
+        }
+        
+        .container {
+            max-width: 900px;
+            width: 100%;
+            background: var(--background);
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            padding: 50px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            animation: containerFade 0.8s ease-out;
+        }
+        
+        .header {
+            margin-bottom: 40px;
+            position: relative;
+        }
+        
+        .avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin: 0 auto 25px;
+            border: 4px solid white;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .title {
+            font-size: 4.2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+            position: relative;
+            display: inline-block;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.05);
+        }
+        
+        .title::after {
+            content: '';
+            position: absolute;
+            bottom: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary), var(--primary-light));
+            border-radius: 3px;
+        }
+        
+        .description {
+            font-size: 1.3rem;
+            color: var(--text-light);
+            max-width: 650px;
+            margin: 30px auto;
+            line-height: 1.7;
+            text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.9);
+        }
+        
+        .highlight {
+            background: linear-gradient(120deg, rgba(33, 150, 243, 0.15) 0%, rgba(100, 181, 246, 0.15) 100%);
+            padding: 3px 8px;
+            border-radius: 6px;
+            font-weight: 600;
+            color: var(--primary);
+        }
+        
+        /* B站按钮样式 - 保持原有粉色渐变 */
+        .bilibili-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--secondary), var(--secondary-light));
+            color: white;
+            text-decoration: none;
+            padding: 16px 36px;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            transition: var(--transition);
+            margin-top: 20px;
+            box-shadow: 0 4px 15px rgba(251, 114, 153, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .bilibili-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: 0.5s;
+        }
+        
+        .bilibili-link:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(251, 114, 153, 0.6);
+        }
+        
+        .bilibili-link:hover::before {
+            left: 100%;
+        }
+        
+        .bilibili-link:active {
+            transform: translateY(0);
+        }
+        
+        .bilibili-link i {
+            margin-right: 12px;
+            font-size: 1.6rem;
+            color: white;
+        }
+        
+        .divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(221, 221, 221, 0.8), transparent);
+            margin: 45px 0;
+        }
+        
+        .features {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 25px;
+            margin-top: 30px;
+        }
+        
+        .feature {
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: 18px;
+            width: 240px;
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* 移除卡片顶部的蓝色横杠 */
+        .feature::before {
+            display: none;
+        }
+        
+        .feature:hover {
+            transform: translateY(-8px);
+            background: rgba(255, 255, 255, 0.85);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .icon-container {
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            width: 100%;
+        }
+        
+        .feature .material-icons {
+            font-size: 48px;
+            color: var(--primary);
+            display: block;
+            line-height: 1;
+        }
+        
+        .feature h3 {
+            color: var(--text);
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+        
+        .feature p {
+            color: var(--text-light);
+            font-size: 1rem;
+            margin-bottom: 20px;
+            text-align: center;
+            line-height: 1.6;
+        }
+        
+        /* 蓝色按钮样式 - 所有功能按钮统一使用 */
+        .blue-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--accent), var(--accent-light));
+            color: white;
+            text-decoration: none;
+            padding: 16px 36px;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            transition: var(--transition);
+            margin-top: auto;
+            box-shadow: 0 4px 15px rgba(33, 150, 243, 0.4);
+            position: relative;
+            overflow: hidden;
+            min-width: 180px;
+            height: 56px;
+            box-sizing: border-box;
+        }
+        
+        .blue-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: 0.5s;
+        }
+        
+        .blue-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(33, 150, 243, 0.6);
+        }
+        
+        .blue-btn:hover::before {
+            left: 100%;
+        }
+        
+        .blue-btn:active {
+            transform: translateY(0);
+        }
+        
+        /* 按钮图标统一样式 */
+        .blue-btn i {
+            margin-right: 12px;
+            font-size: 1.6rem;
+            color: white;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+        }
+        
+        /* 确保所有图标颜色为白色 */
+        .blue-btn .material-icons {
+            color: white;
+            font-size: 1.6rem;
+        }
+        
+        .qq-icon {
+            color: #2196F3;
+            font-size: 3rem;
+            display: block;
+        }
+        
+        .footer {
+            margin-top: 50px;
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+        
+        @keyframes containerFade {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+           100% {
+                transform: translateY(0px);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .title {
+                font-size: 3.2rem;
+            }
+            
+            .container {
+                padding: 35px 25px;
+                border-radius: 20px;
+            }
+            
+            .features {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .feature {
+                width: 100%;
+                max-width: 320px;
+            }
+            
+            .avatar {
+                width: 120px;
+                height: 120px;
+            }
+            
+            .description {
+                font-size: 1.1rem;
+            }
+            
+            .blue-btn {
+                min-width: 160px;
+                height: 52px;
+                font-size: 1.1rem;
+                padding: 14px 30px;
+            }
+            
+            .blue-btn i {
+                font-size: 1.4rem;
+                width: 22px;
+                height: 22px;
+            }
+            
+            .blue-btn .material-icons {
+                font-size: 1.4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="avatar">
+                <img src="camgz.png" alt="CAmgz" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTUwIiBoZWlnaHQ9IjE1MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjMjE5NkYzIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iNjAiIGZpbGw9IiNmZmYiPkM8L3RleHQ+PC9zdmc+'">
+            </div>
+            <h1 class="title">CAmgz</h1>
+            <p class="description"><span class="highlight">通知</span>CAOS1.1正式发布！</p>
+            
+            <a href="https://space.bilibili.com/1000060570?spm_id_from=333.337.0.0" target="_blank" class="bilibili-link">
+                <i class="fab fa-bilibili"></i>访问B站主页
+            </a>
+        </div>
+        
+        <div class="divider"></div>
+        
+        <div class="features">
+            <div class="feature">
+                <div class="icon-container">
+                    <i class="material-icons">share</i>
+                </div>
+                <h3>资源分享</h3>
+                <p>分享一些资源</p>
+                <a href="https://www.123912.com/s/v8J3vd-2LWgh" target="_blank" class="blue-btn">
+                    <i class="material-icons">cloud</i>123云盘
+                </a>
+            </div>
+            
+            <div class="feature">
+                <div class="icon-container">
+                    <i class="material-icons">smartphone</i>
+                </div>
+                <h3>CAOS</h3>
+                <p>VMOS Pro虚拟机的一款基于AOSP的 Android9 ROM 一切，只是为了“简”</p>
+                <a href="https://www.123912.com/s/v8J3vd-sLWgh" target="_blank" class="blue-btn">
+                    <i class="material-icons">download</i>下载
+                </a>
+            </div>
+            
+            <div class="feature">
+                <div class="icon-container">
+                    <i class="fab fa-qq qq-icon"></i>
+                </div>
+                <h3>联系我</h3>
+                <p>有任何问题或建议？欢迎加入QQ群交流</p>
+                <a href="https://jq.qq.com/?_wv=1027&k=5R8WgKcY" target="_blank" class="blue-btn">
+                    <i class="fab fa-qq"></i>QQ群: 1048113612
+                </a>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>© 2023-2025 CAmgz | 个人网站 </p>
+        </div>
+    </div>
+    
+    <script>
+        // 添加动画效果
+        document.addEventListener('DOMContentLoaded', function() {
+            const title = document.querySelector('.title');
+            const features = document.querySelectorAll('.feature');
+            const avatar = document.querySelector('.avatar');
+            
+            // 初始化元素状态
+            title.style.opacity = '0';
+            title.style.transform = 'translateY(-20px)';
+            features.forEach(feature => {
+                feature.style.opacity = '0';
+                feature.style.transform = 'translateY(20px)';
+            });
+            avatar.style.opacity = '0';
+            avatar.style.transform = 'scale(0.8)';
+            
+            // 标题动画
+            setTimeout(() => {
+                title.style.transition = 'opacity 1s ease, transform 1s ease';
+                title.style.opacity = '1';
+                title.style.transform = 'translateY(0)';
+            }, 300);
+            
+            // 头像动画
+            setTimeout(() => {
+                avatar.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+                avatar.style.opacity = '1';
+                avatar.style.transform = 'scale(1)';
+            }, 600);
+            
+            // 功能卡片动画
+            setTimeout(() => {
+                features.forEach((feature, index) => {
+                    setTimeout(() => {
+                        feature.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+                        feature.style.opacity = '1';
+                        feature.style.transform = 'translateY(0)';
+                    }, index * 200);
+                });
+            }, 900);
+            
+            // 为链接添加点击动画
+            const links = document.querySelectorAll('a');
+            links.forEach(link => {
+                link.addEventListener('click', function() {
+                    this.style.transform = 'scale(0.95)';
+                    setTimeout(() => {
+                        this.style.transform = '';
+                    }, 200);
+                });
+            });
+            
+            // 添加浮动动画到头像
+            setInterval(() => {
+                avatar.style.animation = 'float 4s ease-in-out infinite';
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
